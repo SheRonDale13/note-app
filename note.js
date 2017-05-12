@@ -5,13 +5,21 @@ let addNote = (title, body) => {
     title,
     body
   };
-  let newNoteString = JSON.stringify(newNote);
-  fs.writeFile('note1.json', newNoteString, (err) => {
+  let notes = [];
+  fs.readFile('notes.json', 'utf8', (err, data) => {
     if (err) {
       console.log(err);
       process.exit(1);
     }
-    console.log("Added note successfully");
+    notes.push(data);
+    let newNoteString = JSON.stringify(newNote);
+    fs.appendFile('notes.json', newNoteString, 'utf8', (err) => {
+      if (err) {
+        console.log(err);
+        process.exit(1);
+      }
+      console.log("Added note successfully");
+    });
   });
 };
 
