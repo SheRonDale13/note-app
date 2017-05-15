@@ -2,32 +2,33 @@ const fs = require('fs');
 const _ = require('lodash');
 const yargs = require('yargs');
 
-const note = require('./note');
+const notes = require('./notes.js');
 
-command = process.argv[2];
-ycommand = yargs.argv;
-if (!command) {
-  console.log("Please enter a command");
-  process.exit(1);
-}
+const argv = yargs.argv;
+var command = argv._[0];
 
 if (command === 'add') {
-  if (ycommand.title && ycommand.body)
-    note.addNote(ycommand.title, ycommand.body);
-  else
-    console.log("Enter valid arguments");
-} else if (command === 'remove') {
-  if (ycommand.id)
-    note.removeNote(ycommand.id);
-  else
-    console.log("Enter valid arguments");
+  var note = notes.addNote(argv.title, argv.body);
+  if (note) {
+    console.log('Note created');
+    notes.logNote(note);
+  } else {
+    console.log('Note title taken');
+  }
 } else if (command === 'list') {
-  note.listNotes();
+  notes.getAll();
 } else if (command === 'read') {
-  if (ycommand.id)
-    note.viewNote(ycommand.id);
-  else
-    console.log("Enter valid arguments");
+  var note = notes.getNote(argv.title);
+  if (note) {
+    console.log('Note found');
+    notes.logNote(note);
+  } else {
+    console.log('Note not found');
+  }
+} else if (command === 'remove') {
+  var noteRemoved = notes.removeNote(argv.title);
+  var message = noteRemoved ? 'Note was removed' : 'Note not found';
+  console.log(message);
 } else {
-  console.log("Enter a valid command");
+  console.log('Command not recognized');
 }

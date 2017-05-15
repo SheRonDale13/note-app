@@ -1,23 +1,15 @@
 {
-  "name": "node-note-app",
-  "version": "0.0.0",
-  "description": "My test app using node",
+  "name": "notes-node",
+  "version": "1.0.0",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "www.github.com"
-  },
-  "keywords": [
-    "nodejs",
-    "test-app"
-  ],
-  "author": "Sherin Binu",
+  "author": "Andrew Mead",
   "license": "ISC",
   "dependencies": {
-    "lodash": "4.17.4",
-    "yargs": "8.0.1"
+    "lodash": "^4.13.1",
+    "yargs": "^4.7.1"
   }
 }
